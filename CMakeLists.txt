@@ -8,7 +8,7 @@ set(CMAKE_BUILD_TYPE Debug)
 
 # SFML is the graphics library
 set(CMAKE_MODULE_PATH /usr/share/SFML/cmake/Modules)
-find_package(SFML COMPONENTS graphics window system)
+find_package(SFML COMPONENTS system window graphics network audio REQUIRED)
 
 add_executable(Pacru
 	main.cpp

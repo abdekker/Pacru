@@ -16,3 +16,4 @@ add_executable(Pacru
 
 target_compile_options(Pacru PUBLIC -std=c++1z -Werror -Wall -Wextra)
 target_link_libraries(Pacru PUBLIC -lm)
+target_link_libraries(Pacru PUBLIC -lm ${SFML_LIBRARIES})

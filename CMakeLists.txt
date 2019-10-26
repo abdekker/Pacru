@@ -1,10 +1,14 @@
 cmake_minimum_required (VERSION 3.10)
+
+# Pacru is boardgame
 project (Pacru)
 
+# Build type
 set(CMAKE_BUILD_TYPE Debug)
-set(CMAKE_MODULE_PATH /usr/share/SFML/cmake/Modules)
 
-find_package(SFML COMPONENTS system window graphics network audio, main REQUIRED)
+# SFML is the graphics library
+set(CMAKE_MODULE_PATH /usr/share/SFML/cmake/Modules)
+find_package(SFML COMPONENTS graphics window system)
 
 add_executable(Pacru
 	main.cpp

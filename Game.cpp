@@ -35,6 +35,9 @@ BoardImage Game::selectImageBoard(sf::Vector2u monitorDim)
 
 // gets requested middle point boardPosition and object size,
 // return required upper left boardPosition
+/*
+ * Note: this methid results in insufficient board position, hence setting static position for now
+ */
 sf::Vector2f upperLeftPosFromMiddlePos(sf::Vector2f middlePos, sf::Vector2f size)
 {
     return sf::Vector2f(middlePos.x - (size.x)/2, middlePos.y - (size.y)/2);
@@ -55,7 +58,8 @@ void Game::run()
     // get the fitting board
     BoardImage BD = selectImageBoard(monitorDim);
     // get upper left corner boardPosition
-    sf::Vector2f position = upperLeftPosFromMiddlePos(sf::Vector2f(monitorDim.x/2, monitorDim.y/2), BD.BoardDim);
+    // sf::Vector2f position = upperLeftPosFromMiddlePos(sf::Vector2f(monitorDim.x/2, monitorDim.y/2), BD.BoardDim);
+    sf::Vector2f position(25.0f, 15.0f);
     // create the board
     Board board(window, position, BD);
 

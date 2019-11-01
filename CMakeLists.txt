@@ -12,7 +12,7 @@ find_package(SFML COMPONENTS system window graphics network audio REQUIRED)
 
 add_executable(Pacru
 	main.cpp
-	catch.hpp)
+	catch.hpp Board.cpp Board.hpp globals.hpp Game.cpp Game.hpp)
 
 target_compile_options(Pacru PUBLIC -std=c++1z -Werror -Wall -Wextra)
 target_link_libraries(Pacru PUBLIC -lm)

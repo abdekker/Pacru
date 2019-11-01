@@ -9,19 +9,13 @@
 
 #include "Board.hpp"
 
-/*
- * helper functions
- */
-// calculate board dimensions and return structure with those dimensions
-BoardDimensions getBoardDimensions();
-
 class Game
 {
 public:
     void run();
 
 private:
-
+    BoardImage selectImageBoard(sf::Vector2u monitorDim);
 };
 
 #endif //PACRU_GAME_HPP

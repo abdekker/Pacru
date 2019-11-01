@@ -10,7 +10,8 @@
 #include <SFML/Graphics.hpp>
 #include "globals.hpp"
 
-struct BoardDimensions
+//
+struct BoardImage
 {
 public:
     std::string fileName;
@@ -22,23 +23,29 @@ public:
     unsigned int FieldHeight;
     unsigned int SeparationLine;
 
-    BoardDimensions(std::string file, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+    sf::Vector2f BoardDim;
+    sf::Vector2f BorderlandDim;
+    sf::Vector2f FieldDim;
+
+    BoardImage();
+    BoardImage(std::string file, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 };
 
-class PacruBoard
+class Board
 {
 public:
-    PacruBoard(sf::RenderWindow& window, sf::Vector2f position);
-    ~PacruBoard();
+    Board(sf::RenderWindow& window, sf::Vector2f boardPosition , BoardImage BD);
+    ~Board();
 
     void draw();
 
 private:
 
     sf::RenderWindow& window;
-    sf::Vector2f position;
-
-    sf::Texture* boardImage;
+    sf::Vector2f boardPosition;
+    BoardImage boardImage;
+    sf::Texture boardTexture;
+    sf::Sprite boardSprite;
 };
 
 #endif //PACRU_BOARD_HPP

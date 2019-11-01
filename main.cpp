@@ -1,12 +1,9 @@
-#include <SFML/Graphics.hpp>
-
-using namespace std;
+#include "Game.hpp"
 
 int main() {
 
-    unsigned int monitor_width = sf::VideoMode::getDesktopMode().width;
-    unsigned int monitor_height = sf::VideoMode::getDesktopMode().height;
-
+    Game game;
+    game.run();
 
   return 0;
 }

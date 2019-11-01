@@ -21,21 +21,8 @@ enum NUMBER_OF_PLAYERS
     FOUR_PLAYERS
 };
 
-/*
- * Board
- * three sizes: 100%, 75% and 50%
- * all measurments are in pixels
- */
-
-enum BOARD_SIZE
-{
-    _100_PC,
-    _75_PC,
-    _50_PC
-};
-
 // size 100%
-std::string PacruBoardTransparent_100 = "../resources/PacruBoardTransparent_100.png";
+const std::string PacruBoardTransparent_100 = "../resources/PacruBoardTransparent_100.png";
 
 const unsigned int BoardWidth_100 = 753;
 const unsigned int BoardHeight_100 = 753;
@@ -46,7 +33,7 @@ const unsigned int FieldHeight_100 = 50;
 const unsigned int SeparationLine_100 = 3;
 
 // size 75%
-std::string PacruBoardTransparent_75 = "../resources/PacruBoardTransparent_75.png";
+const std::string PacruBoardTransparent_75 = "../resources/PacruBoardTransparent_75.png";
 
 const unsigned int BoardWidth_75 = 565;
 const unsigned int BoardHeight_75 = 565;
@@ -57,7 +44,7 @@ const unsigned int FieldHeight_75 = 37;
 const unsigned int SeparationLine_75 = 2;
 
 // size 50%
-std::string PacruBoardTransparent_50 = "../resources/PacruBoardTransparent_50.png";
+const std::string PacruBoardTransparent_50 = "../resources/PacruBoardTransparent_50.png";
 
 const unsigned int BoardWidth_50 = 377;
 const unsigned int BoardHeight_50 = 377;

@@ -1,5 +1,12 @@
-/misc
+# Git ignores
+
+# Build folders
 /build
 /cmake-*
+
+# CLion and Visual Studio code files
 .idea
+.vscode
+
+# Other files to ignore
 *.pdf

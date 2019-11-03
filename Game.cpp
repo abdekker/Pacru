@@ -1,13 +1,26 @@
 //*****************************************************************************
-// 
-// 
+//
+//
 // sivshani@gmail.com
 //*****************************************************************************
 
 #include <iostream>
 
 #include "Game.hpp"
+#include "GameState.hpp"
 #include "globals.hpp"
+
+void Game::initSystem()
+{
+    // Get monitor dimensions
+    #ifdef DEBUG
+        screenDimensions = sf::Vector2u(50, 50);
+    #else
+        screenDimensions = sf::Vector2u(
+            sf::VideoMode::getDesktopMode().width,
+            sf::VideoMode::getDesktopMode().height);
+    #endif
+}
 
 // calculates which board image is fitting the monitor
 BoardImage Game::selectImageBoard(sf::Vector2u monitorDim)
@@ -45,45 +58,87 @@ sf::Vector2f upperLeftPosFromMiddlePos(sf::Vector2f middlePos, sf::Vector2f size
 
 //----------------------------------------------------------------------------------------------------------------------
 
+Game::Game()
+{
+    // Constructor
+
+    // Initialise the game
+    doQuit = false;
+    redrawCount = 0;
+    initSystem();
+}
+
+Game::~Game()
+{
+    // Destructor...clean up?
+}
+
 void Game::run()
 {
-    /*
-     * setting a window and the board
-     */
-    // get monitor dimensions
-    sf::Vector2u monitorDim(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height);
-    // create a window
-    sf::RenderWindow window(sf::VideoMode(int(monitorDim.x), int(monitorDim.y)), "Pacru");
+    // Create a window
+    sf::RenderWindow window(
+        // Video mode: Width, height and depth
+        sf::VideoMode(screenDimensions.x, screenDimensions.y),
+        "Pacru",                                    // Title
+        sf::Style::Titlebar | sf::Style::Close);    // Window style (note "Fullscreen" removes title bar)
 
-    // get the fitting board
-    BoardImage BD = selectImageBoard(monitorDim);
+    // Get the fitting board
+    BoardImage imgBoard = selectImageBoard(screenDimensions);
+
     // get upper left corner boardPosition
     // sf::Vector2f position = upperLeftPosFromMiddlePos(sf::Vector2f(monitorDim.x/2, monitorDim.y/2), BD.BoardDim);
     sf::Vector2f position(25.0f, 15.0f);
     // create the board
-    Board board(window, position, BD);
+    Board board(window, position, imgBoard);
+    board.setScreenDimensions(screenDimensions);
 
-    std::cout << position.x << " " << position.y << std::endl;
+    GameState gameState;
+
+    // Diagnostics
+    std::cout << "Board X = " << position.x << " Board Y = " << position.y << std::endl;
 
     // run and handle events
-    while(window.isOpen())
+    while (window.isOpen() && !doQuit)
     {
         sf::Event event;
-        while(window.pollEvent(event))
+        while (window.pollEvent(event))
         {
-            switch(event.type)
+            switch (event.type)
             {
                 case sf::Event::Closed:
                     window.close();
                     board.~Board();
                     return;
+
+                case sf::Event::KeyPressed:
+                    // A key has been pressed!
+                    keyDisplayCountDown = 1000;
+                    if (event.key.code == sf::Keyboard::Q)
+                    {
+                        // We should quit!
+                        doQuit = true;
+                    }
+                    else if (event.key.code == sf::Keyboard::S)
+                    {
+                        // Start/stop game
+                        gameState.setRunning(!gameState.getRunning());
+                    }
+                    else if (event.key.code == sf::Keyboard::D)
+                    {
+                        // Start/stop game
+                        gameState.dbgDraw();
+                    }
+                    break;
+
                 default:
                     break;
             }
         }
 
-        window.clear();
-        board.draw();
+        //board.updatePosition(1,-2);
+        redrawCount++;
+        //window.clear();
+        //board.draw(&gameState);
         window.display();
     }
 }
